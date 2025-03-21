@@ -5,14 +5,16 @@ $dbname = getenv('project1_szfd');     // Database name
 $user = getenv('aadi');       // Database username
 $password = getenv('lv4qCVE5eAvcE6oPwcsnMlZzpYTefxd4'); // Database password
 
-// Create PostgreSQL connection string
-$conn_string = "host=$host dbname=$dbname user=$user password=$password";
+/$dsn = "pgsql:host=$host;dbname=$dbname";
 
-// Connect to PostgreSQL database
-$conn = pg_connect($conn_string);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . pg_last_error());
+// Create a PDO instance
+try {
+    $conn = new PDO($dsn, $user, $password);
+    // Set PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected to the PostgreSQL database successfully!";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
 }
+
 ?>
