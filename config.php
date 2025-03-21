@@ -5,7 +5,7 @@ $dbname = getenv('project1_szfd');     // Database name
 $user = getenv('aadi');       // Database username
 $password = getenv('lv4qCVE5eAvcE6oPwcsnMlZzpYTefxd4'); // Database password
 
-/$dsn = "pgsql:host=$host;dbname=$dbname";
+$dsn = "pgsql:host=$host;dbname=$dbname";
 
 // Create a PDO instance
 try {
