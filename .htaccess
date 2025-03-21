@@ -1,5 +1,5 @@
-DirectoryIndex welcom.php
+DirectoryIndex index.php
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /welcom.php [L]
+RewriteRule . /index.php [L]
