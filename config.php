@@ -1,15 +1,18 @@
 <?php
-// Get database connection details from environment variables
-$servername = getenv('DB_HOST'); // Render database host
-$username = getenv('DB_USER');   // Render database username
-$password = getenv('DB_PASSWORD'); // Render database password
-$dbname = getenv('DB_NAME');     // Render database name
+// Get PostgreSQL connection details from environment variables
+$host = getenv('dpg-cveuelvnoe9s73bakqr0-a');       // Database host, like 'dpg-cveuelvnoe9s73bakqr0-a.render.com'
+$dbname = getenv('project1_szfd');     // Database name
+$user = getenv('aadi');       // Database username
+$password = getenv('lv4qCVE5eAvcE6oPwcsnMlZzpYTefxd4'); // Database password
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Create PostgreSQL connection string
+$conn_string = "host=$host dbname=$dbname user=$user password=$password";
+
+// Connect to PostgreSQL database
+$conn = pg_connect($conn_string);
 
 // Check connection
 if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+    die("Connection failed: " . pg_last_error());
 }
 ?>
