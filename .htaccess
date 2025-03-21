@@ -1,5 +1,12 @@
-DirectoryIndex index.php
+# Use the correct index file (choose one)
+DirectoryIndex welcome.php
+# Or use index.php if it's your main file
+# DirectoryIndex index.php
+
+# Enable mod_rewrite for URL rewriting
 RewriteEngine On
+
+# If the requested URL is not a file or directory, rewrite to welcome.php (or index.php)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+RewriteRule ^$ /welcome.php [L]  # Redirect to welcome.php as the homepage
