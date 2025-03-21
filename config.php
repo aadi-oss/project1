@@ -5,16 +5,18 @@ $dbname = getenv('project1_szfd');     // Database name
 $user = getenv('aadi');       // Database username
 $password = getenv('lv4qCVE5eAvcE6oPwcsnMlZzpYTefxd4'); // Database password
 
-$dsn = "pgsql:host=$host;dbname=$dbname";
+$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
 
-// Create a PDO instance
 try {
+    // Establish a PDO connection to MySQL
     $conn = new PDO($dsn, $user, $password);
+    
     // Set PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected to the PostgreSQL database successfully!";
+    
+    echo "Connected to the MySQL database successfully!";
 } catch (PDOException $e) {
+    // Output the error if connection fails
     echo "Connection failed: " . $e->getMessage();
 }
-
 ?>
