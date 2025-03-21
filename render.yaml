@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: project1
+    env: ubuntu
+    plan: free
+    region: oregon
+    buildCommand: |
+      sudo apt update && sudo apt install -y apache2 php libapache2-mod-php
+    startCommand: |
+      sudo service apache2 start && tail -f /dev/null
