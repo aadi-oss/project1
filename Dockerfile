@@ -1,15 +1,20 @@
-FROM php:8.1-fpm
+# Use an official PHP image with Apache as the base image
+FROM php:8.0-apache
 
-# Install necessary PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mysqli
-
-# Set working directory
+# Set the working directory in the container
 WORKDIR /var/www/html
 
-# Copy all project files to the container
-COPY . .
+# Copy the local directory contents (your PHP and HTML files) into the container
+COPY . /var/www/html/
 
-# Expose port
-EXPOSE 9000
+# Enable mod_rewrite (if needed for your site)
+RUN a2enmod rewrite
 
-CMD ["php-fpm"]
+# Install additional PHP extensions (if needed)
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Expose port 80 (the default HTTP port)
+EXPOSE 80
+
+# Start Apache in the foreground (this will keep the container running)
+CMD ["apache2-foreground"]
