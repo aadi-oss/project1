@@ -1,22 +1,27 @@
 <?php
-// Get PostgreSQL connection details from environment variables
-$host = getenv('dpg-cveuelvnoe9s73bakqr0-a');       // Database host, like 'dpg-cveuelvnoe9s73bakqr0-a.render.com'
-$dbname = getenv('project1_szfd');     // Database name
-$user = getenv('aadi');       // Database username
-$password = getenv('lv4qCVE5eAvcE6oPwcsnMlZzpYTefxd4'); // Database password
+// Get the database URL from the environment variable
+$database_url = getenv("postgresql://aadi:lv4qCVE5eAvcE6oPwcsnMlZzpYTefxd4@dpg-cveuelvnoe9s73bakqr0-a/project1_szfd");
 
-$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
-
-try {
-    // Establish a PDO connection to MySQL
-    $conn = new PDO($dsn, $user, $password);
-    
-    // Set PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    echo "Connected to the MySQL database successfully!";
-} catch (PDOException $e) {
-    // Output the error if connection fails
-    echo "Connection failed: " . $e->getMessage();
+if (!$database_url) {
+    die("DATABASE_URL not set in environment variables.");
 }
+
+// Parse the URL
+$db = parse_url($database_url);
+
+$servername = $db["dpg-cveuelvnoe9s73bakqr0-a"];
+$username = $db["aadi"];
+$password = $db["lv4qCVE5eAvcE6oPwcsnMlZzpYTefxd4"];
+$dbname = ltrim($db["project1_szfd"], '/');
+$port = $db["5432"] ?? 3306;
+
+// Connect to the database
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+echo "Connected successfully";
 ?>
