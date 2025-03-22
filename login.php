@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
     header('Location: welcome.php');  // Redirect to welcome.php if the user is already logged in
     exit();
 }
-
+   
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Collect login details from the form
